@@ -1,0 +1,134 @@
+[
+{
+	"uri": "//localhost:1313/vi/",
+	"title": "Amplify Photo Sharing Workshop",
+	"tags": [],
+	"description": "",
+	"content": "Tổng quan Workshop này sẽ đề cập đến cách xây dựng một ứng dụng Fullstack trên AWS. Bạn có thể lưu trữ, thêm các tính năng xác thực một cách đơn giản và nhanh chóng với Amplify - một bộ công cụ của AWS được xây dựng để phát triển, phân phối và quản lý các ứng dụng với khả năng mở rộng và được xây dựng trên các nền tảng web và nền tảng di động phổ biến.\nVới bài workshop này, bạn sẽ không chỉ làm quen với các công nghệ như React, GraphQL mà còn học cách tích hợp chúng vào một ứng dụng thực tế trên nền tảng AWS. Workshop sẽ cung cấp cho bạn một hướng dẫn chi tiết và thực hành từng bước, giúp bạn hiểu rõ hơn về cách sử dụng Amplify và các công nghệ liên quan để xây dựng ứng dụng của riêng bạn.\nChúng ta sẽ bắt tay vào làm một ứng dụng có tên là \u0026ldquo;Photo sharing\u0026rdquo; - một ứng dụng đơn giản cho phép lưu trữ các bức ảnh của bạn trên AWS Storage S3\nNội dung Giới thiệu Các bước chuẩn bị Tạo kết nối đến máy chủ EC2 Quản lý session logs Storage Photo Sharing App Dọn dẹp tài nguyên "
+},
+{
+	"uri": "//localhost:1313/vi/3-api/3.2-deployapi/",
+	"title": "Deploy API",
+	"tags": [],
+	"description": "",
+	"content": "Để deploy API bằng Amplify, ta sử dụng câu lệnh, quá trình deploy sẽ mất vài phút:\namplify push Có thể sử dụng câu lệnh amplify push -y để bỏ qua các câu hỏi với lựa chọn Yes\nDeploy xong, giờ ta có thể tương tác với API\nTesting the API Để test API ta sử dụng AppSync dashboard, để mở AppSync dashboard ta sử dụng câu lệnh, và chọn GraphQL:\namplify console api Trên màn hình AppSync dashboard, chọn Queries. Ta bắt đầu với việc tạo một bài Post mới:\nmutation createPost { createPost( input: { name: \u0026#34;My first post\u0026#34; location: \u0026#34;New York\u0026#34; description: \u0026#34;Best burgers in NYC - Jackson Hole\u0026#34; } ) { id name location description } } Một bài Post đã được tạo ra, giờ ta có thể truy vấn danh sách toàn bộ bài Post như sau:\nquery listPosts { listPosts { items { id name location description } } } "
+},
+{
+	"uri": "//localhost:1313/vi/1-introduce/",
+	"title": "Giới thiệu",
+	"tags": [],
+	"description": "",
+	"content": "AWS Amplify là một bộ công cụ được xây dựng có mục đích để phát triển, phân phối và quản lý các ứng dụng với khả năng mở rộng và được xây dựng trên các nền tảng web và nền tảng di động phổ biến. AWS Amplify giúp tối ưu hóa quá trình phát triển ứng dụng full-stack. Với các thư viện, CLI và dịch vụ của nó, bạn có thể dễ dàng kết nối frontend của mình với Clouds để xác thực, lưu trữ và nhiều tính năng khác.\nTa có thể sử dụng Amplify để xây dựng 1 ứng dụng Full-stack. Amplify cung cấp các công cụ để hosting frontend (Amplify hosting), xây dựng backend, cung cấp tài nguyên lưu trữ data (Amazon DynamoDB), cung cấp Storage lưu trữ ảnh (Amazon S3 bucket), cung cấp tính năng xác thực (Amazon Cognito)\nDưới đây là một số dịch vụ Amplify cung cấp:\nAmplify CLI - Cấu hình tất cả các dịch vụ cần thiết để cung cấp dịch vụ cho backend của bạn thông qua giao diện dòng lệnh đơn giản.\nThư viện Amplify - Thư viện client để xây dựng các use case phổ biến như Authentication, dữ liệu và lưu trữ ảnh\nAmplify Studio - Xây dựng ứng dụng web và di động fullstack của bạn bằng một môi trường phát triển hình ảnh đơn giản và trực quan.\nAmplify UI Components - Thư viện giao diện người dùng để xây dựng ứng dụng frontend của bạn được xây dựng cho React, React Native, Angular, Vue và Flutter.\nAmplify Hosting - là một dịch vụ của AWS cung cấp một luồng làm việc dựa trên git cho triển khai liên tục và lưu trữ các ứng dụng web fullstack.\nAmplify Authentication - dịch vụ xác thực người dùng nhanh chóng\nAmplify Storage - Nơi lưu trữ hình ảnh, âm thanh, video của ứng dụng trên Clouds.\n"
+},
+{
+	"uri": "//localhost:1313/vi/3-api/3.3-usingapi/",
+	"title": "Sử dụng API",
+	"tags": [],
+	"description": "",
+	"content": "API đã được tạo, giờ ta có thể tương tác với chúng trên ứng dụng ReactJS\nĐầu tiên, ta cần phải cấu hình cho ứng dụng React có thể tương tác với GraphQL API. Để cấu hình, ta thêm vào file src/index.js đoạn import dưới đây. Trong đó file aws-exports.js đã đauto-generated trong thư mục src\nimport { Amplify } from \u0026#34;aws-amplify\u0026#34;; import config from \u0026#34;./aws-exports\u0026#34;; Amplify.configure(config); Giờ đây, ứng dụng đã sẵn sàng sử dụng dịch vụ AWS\nTương tác với GraphQL Bây giờ GraphQL API đã hoạt động, chúng ta có thể bắt đầu tương tác với chúng. Đầu tiên chúng ta sẽ thực hiện một truy vấn để lấy dữ liệu từ API.\nĐể làm điều đó, ta cần:\nXác định truy vấn Thực thi truy vấn Lưu dữ liệu được trả về trong trạng thái ứng dụng của chúng ta Liệt kê các mục trong giao diện người dùng của chúng ta Dưới đây là cách truy vấn dữ liệu, lấy tất cả các bài post từ API\n/* Call client.graphql, passing in the query that we\u0026#39;d like to execute. */ import { generateClient } from \u0026#34;aws-amplify/api\u0026#34;; const client = generateClient(); const postData = await client.graphql({ query: listPosts }); src/App.js Update file src/App.js như sau:\nimport React, { useState, useEffect } from \u0026#34;react\u0026#34;; import { generateClient } from \u0026#34;aws-amplify/api\u0026#34;; import { listPosts } from \u0026#34;./graphql/queries\u0026#34;; export default function App() { const [posts, setPosts] = useState([]); const client = generateClient(); useEffect(() =\u0026gt; { fetchPosts(); }, []); async function fetchPosts() { try { const postData = await client.graphql({ query: listPosts }); setPosts(postData.data.listPosts.items); } catch (err) { console.log({ err }); } } return ( \u0026lt;div\u0026gt; \u0026lt;h1\u0026gt;Hello World\u0026lt;/h1\u0026gt; {posts.map((post) =\u0026gt; ( \u0026lt;div key={post.id}\u0026gt; \u0026lt;h3\u0026gt;{post.name}\u0026lt;/h3\u0026gt; \u0026lt;p\u0026gt;{post.location}\u0026lt;/p\u0026gt; \u0026lt;p\u0026gt;{post.description}\u0026lt;/p\u0026gt; \u0026lt;/div\u0026gt; ))}[text](https://us-east-1.console.aws.amazon.com/appsync/home?region%3Dus-east-1#%2F) \u0026lt;/div\u0026gt; ); } Đoạn code trên ta đã sử dụng client.graphql để truy vấn dữ liệu từ GraphQL API, sau đó lưu dữ liệu vào một state và hiển thị chúng. Tất cả các bài post đã được tạo ra trước đó thông qua AWS AppSyncs ở phần trước.\nKiểm tra kết quả:\nnpm start Tất cả bài post đã được hiển thị!\n"
+},
+{
+	"uri": "//localhost:1313/vi/3-api/3.1-graphqlapi/",
+	"title": "Tạo GraphQL API",
+	"tags": [],
+	"description": "",
+	"content": "Để tạo GraphQL API bằng Amplify, ta sử dụng câu lệnh:\namplify add api Mở file amplify/backend/api/photogram/schema.graphql bằng IDE hoặc editor của bạn và cập nhật schema như sau:\ninput AMPLIFY { globalAuthRule: AuthRule = { allow: public } } type Post @model { id: ID! name: String! location: String! description: String! image: String } Lưu thay đổi và chạy lệnh sau:\namplify build "
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequiste/2.1-createreactapp/",
+	"title": "Tạo ứng dụng React",
+	"tags": [],
+	"description": "",
+	"content": "Đầu tiên, ta cần tạo một ứng dụng React sử dụng CRA Create React App CLI\nnpx create-react-app photogram Cd vào thư mục ứng dụng, cài các thư viện cần thiết như aws-amplify, @emotion/css, uuid. react-router-dom@5, @aws-amplify/ui-react\ncd photogram npm install aws-amplify @emotion/css uuid react-router-dom@5 @aws-amplify/ui-react "
+},
+{
+	"uri": "//localhost:1313/vi/4-authentication/4.1-authapi/",
+	"title": "Thêm tính năng xác thực",
+	"tags": [],
+	"description": "",
+	"content": "Ở phần này, ta sẽ thực hiện thêm tính năng xác thực người dùng cho ứng dụng. Để thêm xác thực với Amplify ta sử dụng câu lệnh dưới đây:\namplify add auth Tiến hành deploy lại:\namplify push Khi deploy hoàn thành, ta sẽ có các dịch vụ xác thực được thiết lập trong Amazon Cognito. Để xem thêm thông tin, chạy lệnh sau:\namplify console auth Chọn User Pool\n"
+},
+{
+	"uri": "//localhost:1313/vi/6-photosharingapp/4.1-authapi/",
+	"title": "Thêm tính năng xác thực",
+	"tags": [],
+	"description": "",
+	"content": "Ở phần này, ta sẽ thực hiện thêm tính năng xác thực người dùng cho ứng dụng. Để thêm xác thực với Amplify ta sử dụng câu lệnh dưới đây:\namplify add auth Tiến hành deploy lại:\namplify push Khi deploy hoàn thành, ta sẽ có các dịch vụ xác thực được thiết lập trong Amazon Cognito. Để xem thêm thông tin, chạy lệnh sau:\namplify console auth Chọn User Pool\n"
+},
+{
+	"uri": "//localhost:1313/vi/4-authentication/4.2-authfe/",
+	"title": "Xác thực trong React",
+	"tags": [],
+	"description": "",
+	"content": "withAuthenticator component Để thêm tính năng xác thực vào ứng dụng React, chúng ta sẽ vào src/App.js và import withAuthenticator HOC (Higher Order Component) từ @aws-amplify/ui-react:\n// src/App.js, import the withAuthenticator component and associated CSS import { withAuthenticator } from \u0026#34;@aws-amplify/ui-react\u0026#34;; import \u0026#34;@aws-amplify/ui-react/styles.css\u0026#34;; Tiếp theo, bọc App component với withAuthenticator\nfunction App() { /* existing code here, no changes */ } /* src/App.js, change the default export to this: */ export default withAuthenticator(App); Reload ứng dụng và xem kết quả, tính năng xác thực đã được thêm\nChọn \u0026ldquo;Đăng ký\u0026rdquo; và làm theo hướng dẫn để tạo tài khoản. Hãy chắc chắn sử dụng một địa chỉ email thật! Sau khi gửi request đăng kí, kiểm tra email của bạn để xác nhận đăng ký.\nĐã tạo thành công tính năng xác thực, bạn có thể xem nó bất kỳ lúc nào trong console bằng cách chạy lệnh sau - chọn User Pool:\namplify console auth Using service: Cognito, provided by: awscloudformation ? Which console ❯ User Pool Identity Pool Both Thêm nút Đăng xuất Update file App.js\nfunction App({ signOut, user }) { ... \u0026lt;h1\u0026gt;Hello World\u0026lt;/h1\u0026gt; ... \u0026lt;button onClick={signOut}\u0026gt;Sign out\u0026lt;/button\u0026gt; } Thêm style tại file src/index.css\n:root { --amplify-primary-color: #006eff; --amplify-primary-tint: #005ed9; --amplify-primary-shade: #005ed9; } Quan sát kết quả, nút Đăng xuất được thêm thành công\nKiểm tra thông tin đăng nhập Chúng ta có thể xem thông tin người dùng khi họ đã đăng nhập bằng cách gọi currentAuthenticatedUser() trong useEffect:\nimport { getCurrentUser } from \u0026#34;aws-amplify/auth\u0026#34;; ... useEffect(() =\u0026gt; { fetchPosts(); currentAuthenticatedUser(); }, []); async function currentAuthenticatedUser() { try { const { username, userId } = await getCurrentUser(); console.log(`The username: ${username}`); console.log(`The userId: ${userId}`); } catch (err) { console.log(err); } } Kiểm tra thông tin trên Console của Browser\n"
+},
+{
+	"uri": "//localhost:1313/vi/6-photosharingapp/4.2-authfe/",
+	"title": "Xác thực trong React",
+	"tags": [],
+	"description": "",
+	"content": "withAuthenticator component Để thêm tính năng xác thực vào ứng dụng React, chúng ta sẽ vào src/App.js và import withAuthenticator HOC (Higher Order Component) từ @aws-amplify/ui-react:\n// src/App.js, import the withAuthenticator component and associated CSS import { withAuthenticator } from \u0026#34;@aws-amplify/ui-react\u0026#34;; import \u0026#34;@aws-amplify/ui-react/styles.css\u0026#34;; Tiếp theo, bọc App component với withAuthenticator\nfunction App() { /* existing code here, no changes */ } /* src/App.js, change the default export to this: */ export default withAuthenticator(App); Reload ứng dụng và xem kết quả, tính năng xác thực đã được thêm\nChọn \u0026ldquo;Đăng ký\u0026rdquo; và làm theo hướng dẫn để tạo tài khoản. Hãy chắc chắn sử dụng một địa chỉ email thật! Sau khi gửi request đăng kí, kiểm tra email của bạn để xác nhận đăng ký.\nĐã tạo thành công tính năng xác thực, bạn có thể xem nó bất kỳ lúc nào trong console bằng cách chạy lệnh sau - chọn User Pool:\namplify console auth Using service: Cognito, provided by: awscloudformation ? Which console ❯ User Pool Identity Pool Both Thêm nút Đăng xuất Update file App.js\nfunction App({ signOut, user }) { ... \u0026lt;h1\u0026gt;Hello World\u0026lt;/h1\u0026gt; ... \u0026lt;button onClick={signOut}\u0026gt;Sign out\u0026lt;/button\u0026gt; } Thêm style tại file src/index.css\n:root { --amplify-primary-color: #006eff; --amplify-primary-tint: #005ed9; --amplify-primary-shade: #005ed9; } Quan sát kết quả, nút Đăng xuất được thêm thành công\nKiểm tra thông tin đăng nhập Chúng ta có thể xem thông tin người dùng khi họ đã đăng nhập bằng cách gọi currentAuthenticatedUser() trong useEffect:\nimport { getCurrentUser } from \u0026#34;aws-amplify/auth\u0026#34;; ... useEffect(() =\u0026gt; { fetchPosts(); currentAuthenticatedUser(); }, []); async function currentAuthenticatedUser() { try { const { username, userId } = await getCurrentUser(); console.log(`The username: ${username}`); console.log(`The userId: ${userId}`); } catch (err) { console.log(err); } } Kiểm tra thông tin trên Console của Browser\n"
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequiste/",
+	"title": "Các bước chuẩn bị",
+	"tags": [],
+	"description": "",
+	"content": "\rTrong phần này, ta cần tạo 1 ứng dụng React và config Amplify cho ứng dụng đó\nĐể tìm hiểu thêm về Create React App và Amplify bạn có thể tham khảo docs :\nVề React App Về Amplify Nội dung Create React App Config Amplify "
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequiste/2.2-configamplify/",
+	"title": "Cấu hình Amplify",
+	"tags": [],
+	"description": "",
+	"content": "Install Amplify CLI npm install -g @aws-amplify/cli Cấu hình Amplify bằng câu lệnh sau:\namplify configure - Specify the AWS Region: us-east-1 || us-west-2 || eu-central-1 - Specify the username of the new IAM user: amplify-cli-user \u0026gt; In the AWS Console, click Next: Permissions, Next: Tags, Next: Review, \u0026amp; Create User to create the new IAM user. Then return to the command line \u0026amp; press Enter. - Enter the access key of the newly created user: ? accessKeyId:(\u0026lt;YOUR_ACCESS_KEY_ID\u0026gt;) ? secretAccessKey: (\u0026lt;YOUR_SECRET_ACCESS_KEY\u0026gt;) - Profile Name: amplify-cli-user Khởi tạo Amplify trong ứng dụng Photogram amplify init Sau khi khởi tạo xong, ta sẽ thấy một thư mục mới được sinh ra có tên là amplify trong project, và một file có tên aws-exports.js được sinh ra trong thư mục src\nĐể xem trạng thái của Amplify, ta sử dụng câu lệnh:\namplify status Để khởi chạy Amplify console trên browser ta sử dụng câu lệnh:\namplify console "
+},
+{
+	"uri": "//localhost:1313/vi/4-authentication/",
+	"title": "Authentication",
+	"tags": [],
+	"description": "",
+	"content": "Ở phần này, ta sẽ thêm Authentication cho ứng dụng, sử dụng AWS Cognito và @aws-amplify/ui-react\nNội dung Authentication với AWS Cognito Authentication với React "
+},
+{
+	"uri": "//localhost:1313/vi/6-photosharingapp/",
+	"title": "Authentication",
+	"tags": [],
+	"description": "",
+	"content": "Ở phần này, ta sẽ thêm Authentication cho ứng dụng, sử dụng AWS Cognito và @aws-amplify/ui-react\nNội dung Authentication với AWS Cognito Authentication với React "
+},
+{
+	"uri": "//localhost:1313/vi/5-storage/",
+	"title": "Storage Amazon S3",
+	"tags": [],
+	"description": "",
+	"content": "Để lưu trữ ảnh, ta sẽ sử dụng AWS S3, config S3 như sau:\namplify add storage Deploy ứng dụng:\namplify push Ta sẽ sử dụng API của S3 để upload và get URL ảnh\nUpload item import { uploadData } from \u0026#34;aws-amplify/storage\u0026#34;; const handleUpload = async (key, data) =\u0026gt; { const operation = uploadData({ key, data, options: { accessLevel: \u0026#34;guest\u0026#34;, }, }); const result = await operation.result; }; Truy xuất item import { getUrl } from \u0026#34;aws-amplify/storage\u0026#34;; const handleGetUrl = async (key) =\u0026gt; { const res = await getUrl({ key, options: { validateObjectExistence: true, }, }); return res.url.href; }; Bây giờ chúng ta có thể bắt đầu lưu các hình ảnh vào S3 và tiếp tục xây dựng Photo Sharing App.\n"
+},
+{
+	"uri": "//localhost:1313/vi/3-api/",
+	"title": "Tạo API",
+	"tags": [],
+	"description": "",
+	"content": "Trong bước này, chúng ta sẽ thực hiện tạo API và deploy chúng bằng Amplify. Sau đó sẽ kết nối ứng dụng React với APIs vừa tạo. Ở đây chúng ta chọn GraphQL API\nNội dung Tạo GraphQL API Deploy API Using API "
+},
+{
+	"uri": "//localhost:1313/vi/7-cleanup/",
+	"title": "Dọn dẹp tài nguyên  ",
+	"tags": [],
+	"description": "",
+	"content": "Chúng ta sẽ tiến hành các bước sau để xóa các tài nguyên chúng ta đã tạo trong bài thực hành này.\nXóa EC2 instance Truy cập giao diện quản trị dịch vụ EC2 Click Instances. Click chọn cả 2 instance Public Linux Instance và Private Windows Instance. Click Instance state. Click Terminate instance, sau đó click Terminate để xác nhận. Truy cập giao diện quản trị dịch vụ IAM Click Roles. Tại ô tìm kiếm , điền SSM. Click chọn SSM-Role. Click Delete, sau đó điền tên role SSM-Role và click Delete để xóa role. Click Users. Click chọn user Portfwd. Click Delete, sau đó điền tên user Portfwd và click Delete để xóa user. Xóa S3 bucket Truy cập giao diện quản trị dịch vụ System Manager - Session Manager. Click tab Preferences. Click Edit. Kéo chuột xuống dưới. Tại mục S3 logging. Bỏ chọn Enable để tắt tính năng logging. Kéo chuột xuống dưới. Click Save. Truy cập giao diện quản trị dịch vụ S3 Click chọn S3 bucket chúng ta đã tạo cho bài thực hành. ( Ví dụ : lab-fcj-bucket-0001 ) Click Empty. Điền permanently delete, sau đó click Empty để tiến hành xóa object trong bucket. Click Exit. Sau khi xóa hết object trong bucket, click Delete Điền tên S3 bucket, sau đó click Delete bucket để tiến hành xóa S3 bucket. Xóa các VPC Endpoint Truy cập vào giao diện quản trị dịch vụ VPC Click Endpoints. Chọn 4 endpoints chúng ta đã tạo cho bài thực hành bao gồm SSM, SSMMESSAGES, EC2MESSAGES, S3GW. Click Actions. Click Delete VPC endpoints. Tại ô confirm , điền delete. Click Delete để tiến hành xóa các endpoints. Click biểu tượng refresh, kiểm tra tất cả các endpoints đã bị xóa trước khi làm bước tiếp theo. Xóa VPC Truy cập vào giao diện quản trị dịch vụ VPC Click Your VPCs. Click chọn Lab VPC. Click Actions. Click Delete VPC. Tại ô confirm, điền delete để xác nhận, click Delete để thực hiện xóa Lab VPC và các tài nguyên liên quan. "
+},
+{
+	"uri": "//localhost:1313/vi/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "//localhost:1313/vi/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
