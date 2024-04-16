@@ -2,17 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/</loc>
-    <lastmod>1970-01-01T08:33:42+08:00</lastmod>
+    <loc>//localhost:1313/4-authentication/4.1-authapi/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="//localhost:1313/vi/"
+                href="//localhost:1313/vi/4-authentication/4.1-authapi/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="//localhost:1313/"
+                href="//localhost:1313/4-authentication/4.1-authapi/"
                 />
   </url><url>
     <loc>//localhost:1313/3-api/3.1-graphqlapi/</loc>
@@ -27,6 +26,42 @@
                 href="//localhost:1313/3-api/3.1-graphqlapi/"
                 />
   </url><url>
+    <loc>//localhost:1313/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/"
+                />
+  </url><url>
+    <loc>//localhost:1313/6-photosharingapp/6.1-appsetup/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/6-photosharingapp/6.1-appsetup/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/6-photosharingapp/6.1-appsetup/"
+                />
+  </url><url>
+    <loc>//localhost:1313/4-authentication/4.2-authfe/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/4-authentication/4.2-authfe/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/4-authentication/4.2-authfe/"
+                />
+  </url><url>
     <loc>//localhost:1313/2-prerequiste/2.1-createreactapp/</loc>
     <xhtml:link
                 rel="alternate"
@@ -39,18 +74,6 @@
                 href="//localhost:1313/2-prerequiste/2.1-createreactapp/"
                 />
   </url><url>
-    <loc>//localhost:1313/3-api/3.2-deployapi/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="//localhost:1313/vi/3-api/3.2-deployapi/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="//localhost:1313/3-api/3.2-deployapi/"
-                />
-  </url><url>
     <loc>//localhost:1313/1-introduce/</loc>
     <xhtml:link
                 rel="alternate"
@@ -61,18 +84,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="//localhost:1313/1-introduce/"
-                />
-  </url><url>
-    <loc>//localhost:1313/4-s3log/4.1-updateiamrole/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="//localhost:1313/vi/4-s3log/4.1-updateiamrole/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="//localhost:1313/4-s3log/4.1-updateiamrole/"
                 />
   </url><url>
     <loc>//localhost:1313/3-api/3.3-usingapi/</loc>
@@ -99,16 +110,16 @@
                 href="//localhost:1313/2-prerequiste/2.2-configamplify/"
                 />
   </url><url>
-    <loc>//localhost:1313/4-s3log/4.2-creates3bucket/</loc>
+    <loc>//localhost:1313/3-api/3.2-deployapi/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="//localhost:1313/vi/4-s3log/4.2-creates3bucket/"
+                href="//localhost:1313/vi/3-api/3.2-deployapi/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="//localhost:1313/4-s3log/4.2-creates3bucket/"
+                href="//localhost:1313/3-api/3.2-deployapi/"
                 />
   </url><url>
     <loc>//localhost:1313/2-prerequiste/</loc>
@@ -123,16 +134,28 @@
                 href="//localhost:1313/2-prerequiste/"
                 />
   </url><url>
-    <loc>//localhost:1313/4-s3log/4.3-creategwes3/</loc>
+    <loc>//localhost:1313/6-photosharingapp/6.2-reactrouter/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="//localhost:1313/vi/4-s3log/4.3-creategwes3/"
+                href="//localhost:1313/vi/6-photosharingapp/6.2-reactrouter/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="//localhost:1313/4-s3log/4.3-creategwes3/"
+                href="//localhost:1313/6-photosharingapp/6.2-reactrouter/"
+                />
+  </url><url>
+    <loc>//localhost:1313/6-photosharingapp/6.3-tryitout/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/6-photosharingapp/6.3-tryitout/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/6-photosharingapp/6.3-tryitout/"
                 />
   </url><url>
     <loc>//localhost:1313/3-api/</loc>
@@ -147,41 +170,76 @@
                 href="//localhost:1313/3-api/"
                 />
   </url><url>
-    <loc>//localhost:1313/4-s3log/</loc>
+    <loc>//localhost:1313/6-photosharingapp/6.4-authgraphql/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="//localhost:1313/vi/4-s3log/"
+                href="//localhost:1313/vi/6-photosharingapp/6.4-authgraphql/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="//localhost:1313/4-s3log/"
+                href="//localhost:1313/6-photosharingapp/6.4-authgraphql/"
                 />
   </url><url>
-    <loc>//localhost:1313/4-s3log/4.4-configsessionlogs/</loc>
+    <loc>//localhost:1313/4-authentication/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="//localhost:1313/vi/4-s3log/4.4-configsessionlogs/"
+                href="//localhost:1313/vi/4-authentication/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="//localhost:1313/4-s3log/4.4-configsessionlogs/"
+                href="//localhost:1313/4-authentication/"
                 />
   </url><url>
-    <loc>//localhost:1313/6-cleanup/</loc>
-    <lastmod>1970-01-01T08:33:42+08:00</lastmod>
+    <loc>//localhost:1313/6-photosharingapp/6.5-hosting/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="//localhost:1313/vi/6-cleanup/"
+                href="//localhost:1313/vi/6-photosharingapp/6.5-hosting/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="//localhost:1313/6-cleanup/"
+                href="//localhost:1313/6-photosharingapp/6.5-hosting/"
+                />
+  </url><url>
+    <loc>//localhost:1313/5-storage/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/5-storage/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/5-storage/"
+                />
+  </url><url>
+    <loc>//localhost:1313/6-photosharingapp/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/6-photosharingapp/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/6-photosharingapp/"
+                />
+  </url><url>
+    <loc>//localhost:1313/7-cleanup/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/7-cleanup/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/7-cleanup/"
                 />
   </url><url>
     <loc>//localhost:1313/categories/</loc>

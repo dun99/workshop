@@ -1,12 +1,13 @@
 ---
 title: "Adding Authorization to the GraphQL API"
 date: "`r Sys.Date()`"
-weight: 1
+weight: 4
 chapter: false
-pre: " <b> 6.4. </b> "
+pre: " <b> 6.4 </b> "
 ---
 
 You can update the AppSync API to enable multiple authorization modes.
+
 In this example, we will update the API to use the both Cognito and API Key to enable a combination of public and private access. This will also enable us to implement authorization for the API.
 To enable multiple authorization modes, reconfigure the API:
 
@@ -64,7 +65,7 @@ await client.graphql({
 
 Next we will update the app to create a new route for viewing only the posts that we've created.
 
-To do so, first open CreatePost.js and update the save mutation with the following to specify the authmode and set the owner of the post in the local state:
+To do so, first open **_CreatePost.js_** and update the save mutation with the following to specify the authmode and set the owner of the post in the local state:
 
 ```
 async function save() {
@@ -104,7 +105,7 @@ async function save() {
   }
 ```
 
-Next, open App.js.
+Next, open **_App.js_**.
 
 Create a new piece of state to hold your own posts named myPosts:
 
@@ -112,7 +113,7 @@ Create a new piece of state to hold your own posts named myPosts:
 const [myPosts, updateMyPosts] = useState([]);
 ```
 
-Next, in the setPostState method, update myPosts with posts from the signed in user:
+Next, in the **_setPostState_** method, update myPosts with posts from the signed in user:
 
 ```
 async function setPostState(postsArray) {
@@ -131,7 +132,7 @@ Now, add a new route to show your posts:
 
 ```
 
-Finally, open Header.js and add a link to the new route:
+Finally, open **_Header.js_** and add a link to the new route:
 
 ```
 <Link to="/myposts" className={linkStyle}>

@@ -1,14 +1,14 @@
 ---
 title: "Deploy API"
 date: "`r Sys.Date()`"
-weight: 1
+weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
 Để deploy API bằng Amplify, ta sử dụng câu lệnh, quá trình deploy sẽ mất vài phút:
 
-```html
+```
 amplify push
 ```
 
@@ -24,7 +24,7 @@ Deploy xong, giờ ta có thể tương tác với API
 
 Để test API ta sử dụng AppSync dashboard, để mở AppSync dashboard ta sử dụng câu lệnh, và chọn GraphQL:
 
-```html
+```
 amplify console api
 ```
 
@@ -32,7 +32,7 @@ amplify console api
 
 Trên màn hình AppSync dashboard, chọn Queries. Ta bắt đầu với việc tạo một bài Post mới:
 
-```html
+```
 mutation createPost {
   createPost(
     input: {
@@ -53,7 +53,7 @@ mutation createPost {
 
 Một bài Post đã được tạo ra, giờ ta có thể truy vấn danh sách toàn bộ bài Post như sau:
 
-```html
+```
 query listPosts {
   listPosts {
     items {

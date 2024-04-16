@@ -8,12 +8,12 @@ pre: " <b> 3.3. </b> "
 
 Now, our API is created & we can test it out in our app!
 
-The first thing we need to do is to configure our React application to be aware of our Amplify project. We can do this by referencing the auto-generated ***aws-exports.js*** file that is now in our ***src*** folder.
+The first thing we need to do is to configure our React application to be aware of our Amplify project. We can do this by referencing the auto-generated **_aws-exports.js_** file that is now in our **_src_** folder.
 
-To configure the app, open ***src/index.js*** and add the following code below the last import:
+To configure the app, open **_src/index.js_** and add the following code below the last import:
 
-```html
-import { Amplify } from "aws-amplify"; 
+```
+import { Amplify } from "aws-amplify";
 import config from "./aws-exports";
 Amplify.configure(config);
 ```
@@ -33,16 +33,18 @@ To do so, we need to:
 
 The main thing to notice in this component is the API call. Take a look at this piece of code:
 
-```html
+```
 /* Call client.graphql, passing in the query that we'd like to execute. */
 import { generateClient } from "aws-amplify/api";
 const client = generateClient();
 const postData = await client.graphql({ query: listPosts });
 ```
-#### src/App.js
-Update your ***src/App.js*** file with the following code, which incorporates the snippet above - calling the GraphQL API
 
-```html
+#### src/App.js
+
+Update your **_src/App.js_** file with the following code, which incorporates the snippet above - calling the GraphQL API
+
+```
 import React, { useState, useEffect } from "react";
 
 import { generateClient } from "aws-amplify/api";
@@ -81,11 +83,11 @@ export default function App() {
 }
 ```
 
-In the above code we are using ***client.graphql*** to call the GraphQL API, and then taking the result from that API call and storing the data in our state. This should be the list of posts you created via the GraphQL editor.
+In the above code we are using **_client.graphql_** to call the GraphQL API, and then taking the result from that API call and storing the data in our state. This should be the list of posts you created via the GraphQL editor.
 
 Next, test the app - in the terminal type:
 
-```html
+```
 npm start
 ```
 

@@ -8,7 +8,7 @@ pre: " <b> 4.1. </b> "
 
 Ở phần này, ta sẽ thực hiện thêm tính năng xác thực người dùng cho ứng dụng. Để thêm xác thực với Amplify ta sử dụng câu lệnh dưới đây:
 
-```html
+```
 amplify add auth
 ```
 
@@ -16,7 +16,7 @@ amplify add auth
 
 Tiến hành deploy lại:
 
-```html
+```
 amplify push
 ```
 
@@ -24,7 +24,7 @@ amplify push
 
 Khi deploy hoàn thành, ta sẽ có các dịch vụ xác thực được thiết lập trong Amazon Cognito. Để xem thêm thông tin, chạy lệnh sau:
 
-```html
+```
 amplify console auth
 ```
 

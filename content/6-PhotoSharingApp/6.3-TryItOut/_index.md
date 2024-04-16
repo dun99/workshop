@@ -1,9 +1,9 @@
 ---
 title: "Try it out"
 date: "`r Sys.Date()`"
-weight: 1
+weight: 3
 chapter: false
-pre: " <b> 6.3. </b> "
+pre: " <b> 6.3 </b> "
 ---
 
 #### Deleting the existing data

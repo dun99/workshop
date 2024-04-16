@@ -10,7 +10,7 @@ pre: " <b> 4.2. </b> "
 
 Để thêm tính năng xác thực vào ứng dụng React, chúng ta sẽ vào **_src/App.js_** và import **_withAuthenticator_** HOC (Higher Order Component) từ **_@aws-amplify/ui-react_**:
 
-```html
+```
 // src/App.js, import the withAuthenticator component and associated CSS
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -18,7 +18,7 @@ import "@aws-amplify/ui-react/styles.css";
 
 Tiếp theo, bọc App component với withAuthenticator
 
-```html
+```
 function App() {
   /* existing code here, no changes */
 }
@@ -37,7 +37,7 @@ Chọn "Đăng ký" và làm theo hướng dẫn để tạo tài khoản. Hãy 
 
 Đã tạo thành công tính năng xác thực, bạn có thể xem nó bất kỳ lúc nào trong console bằng cách chạy lệnh sau - chọn User Pool:
 
-```html
+```
 amplify console auth
 
 Using service: Cognito, provided by: awscloudformation
@@ -48,9 +48,10 @@ Both
 ```
 
 #### Thêm nút Đăng xuất
-Update file ***App.js***
 
-```html
+Update file **_App.js_**
+
+```
 function App({ signOut, user }) {
   ...
   <h1>Hello World</h1>
@@ -59,10 +60,9 @@ function App({ signOut, user }) {
 }
 ```
 
-Thêm style tại file ***src/index.css***
+Thêm style tại file **_src/index.css_**
 
-
-```html
+```
 :root {
   --amplify-primary-color: #006eff;
   --amplify-primary-tint: #005ed9;
@@ -76,10 +76,9 @@ Quan sát kết quả, nút Đăng xuất được thêm thành công
 
 #### Kiểm tra thông tin đăng nhập
 
+Chúng ta có thể xem thông tin người dùng khi họ đã đăng nhập bằng cách gọi **_currentAuthenticatedUser()_** trong **_useEffect_**:
 
-Chúng ta có thể xem thông tin người dùng khi họ đã đăng nhập bằng cách gọi ***currentAuthenticatedUser()*** trong ***useEffect***:
-
-```html
+```
 import { getCurrentUser } from "aws-amplify/auth";
 ...
 

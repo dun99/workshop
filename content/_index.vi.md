@@ -23,4 +23,4 @@ Chúng ta sẽ bắt tay vào làm một ứng dụng có tên là "Photo sharin
 4.  [Quản lý session logs](4-s3log/)
 5.  [Storage](5-s3/)
 6.  [Photo Sharing App](6-PhotoSharingApp/)
-7.  [Dọn dẹp tài nguyên](6-cleanup/)
+7.  [Dọn dẹp tài nguyên](7-cleanup/)

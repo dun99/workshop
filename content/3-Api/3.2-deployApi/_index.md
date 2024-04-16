@@ -1,7 +1,7 @@
 ---
 title: "Deploying the API"
 date: "`r Sys.Date()`"
-weight: 1
+weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
@@ -10,7 +10,7 @@ pre: " <b> 3.2. </b> "
 
 To deploy the API, run the push command:
 
-```html
+```
 amplify push
 ```
 
@@ -26,7 +26,7 @@ Now the API is live and you can start interacting with it!
 
 To test it out we can use the GraphQL editor in the AppSync dashboard. To open the AppSync dashboard, run the following command:
 
-```html
+```
 amplify console api
 ```
 
@@ -36,7 +36,7 @@ Alternatively, you can just navigate to the AppSync dashboard in the AWS console
 
 In the AppSync dashboard, click on Queries to open the GraphiQL editor. In the editor, create a new post with the following mutation:
 
-```html
+```
 mutation createPost {
   createPost(
     input: {
@@ -54,9 +54,9 @@ mutation createPost {
 ```
 
 ![API](/images/3.api/deploy-05.png)
-Then, query  get all the posts:
+Then, query get all the posts:
 
-```html
+```
 query listPosts {
   listPosts {
     items {

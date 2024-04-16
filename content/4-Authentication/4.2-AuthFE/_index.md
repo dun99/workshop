@@ -10,7 +10,7 @@ pre: " <b> 4.2. </b> "
 
 To add authentication in the React app, we'll go into **_src/App.js_** and first import the **_withAuthenticator_** HOC (Higher Order Component) from **_@aws-amplify/ui-react_**:
 
-```html
+```
 // src/App.js, import the withAuthenticator component and associated CSS
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -19,7 +19,7 @@ import "@aws-amplify/ui-react/styles.css";
 
 Next, we'll wrap our default export (the App component) with the withAuthenticator HOC:
 
-```html
+```
 function App() {
   /* existing code here, no changes */
 }
@@ -38,7 +38,7 @@ Click "Sign Up" and follow the prompts to create an account. Be sure to use a re
 
 Now that you have the authentication service created, you can view it any time in the console by running the following command - select User Pool:
 
-```html
+```
 amplify console auth
 
 Using service: Cognito, provided by: awscloudformation
@@ -52,7 +52,7 @@ Both
 
 You can also easily add a preconfigured UI component for signing out. First, modify the App function signature.
 
-```html
+```
 function App({ signOut, user }) {
   ...
    <h1>Hello World</h1>
@@ -63,9 +63,9 @@ function App({ signOut, user }) {
 
 Add some styling
 
-Next, let's update the UI component styling. Open ***src/index.css*** and add the following styling:
+Next, let's update the UI component styling. Open **_src/index.css_** and add the following styling:
 
-```html
+```
 :root {
   --amplify-primary-color: #006eff;
   --amplify-primary-tint: #005ed9;
@@ -79,9 +79,9 @@ See the result, you can click Sign out button to Sign out
 
 #### Accessing user data
 
-We can access the user's info now that they are signed in by calling ***currentAuthenticatedUser()*** in ***useEffect***. Add the following code to ***src/App.js*** in the appropriate places
+We can access the user's info now that they are signed in by calling **_currentAuthenticatedUser()_** in **_useEffect_**. Add the following code to **_src/App.js_** in the appropriate places
 
-```html
+```
 import { getCurrentUser } from "aws-amplify/auth";
 ...
 

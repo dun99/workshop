@@ -3,7 +3,7 @@ title: "App Setup"
 date: "`r Sys.Date()`"
 weight: 1
 chapter: false
-pre: " <b> 6.1. </b> "
+pre: " <b> 6.1 </b> "
 ---
 
 #### Creating the folder structure for our app
@@ -16,14 +16,11 @@ Next, create the following files in the src directory:
 - Post.js
 - Posts.js
 
-```html
-amplify add auth
-```
-
 Next, we'll go one by one and update these files with our new code.
 
 #### Button.js
-```html
+
+```
 import React from "react";
 import { css } from "@emotion/css";
 
@@ -51,9 +48,12 @@ const buttonStyle = (type) => css`
   }
 `;
 ```
-***
+
+---
+
 #### Header.js
-```html
+
+```
 import React from "react";
 import { css } from "@emotion/css";
 import { Link } from "react-router-dom";
@@ -64,10 +64,6 @@ export default function Header() {
       <h1 className={headerStyle}>Postagram</h1>
       <Link to="/" className={linkStyle}>
         All Posts
-      </Link>
-      <Link to="/myposts" className={linkStyle}>
-        My Posts
-      </Link>
     </div>
   );
 }
@@ -91,11 +87,15 @@ const linkStyle = css`
   }
 `;
 
-````
-#### Posts.js
-```html
-// Posts.js
+```
 
+#### Posts.js
+
+The next thing we'll create the **_Posts_** component to render a list of posts, this will go in the main view of the app. The only data from the post that will be rendered in this view is the post name and post image.
+
+The posts array will be passed in as a prop to the **_Posts_** component.
+
+```
 import React from "react";
 import { css } from "@emotion/css";
 import { Link } from "react-router-dom";
@@ -140,32 +140,34 @@ const imageStyle = css`
   max-width: 400px;
 `;
 ```
-*** 
+
+---
 
 #### CreatePost.js
 
-The next component we'll create is CreatePost. This component is a form which will be displayed to the user as a modal.
+The next component we'll create is **_CreatePost_**. This component is a form to create post which will be displayed to the user as a modal.
 
 The props this component will receive are the following:
 
-- ***updateOverlayVisibility*** - This function will toggle the overlay to show/hide it
-- ***updatePosts*** - This function will allow us to update the main posts array
-- ***posts*** - The posts coming back from our API
+- **_updateOverlayVisibility_** - This function will toggle to show/hide modal
+- **_updatePosts_** - This function will allow us to update the main posts array
+- **_posts_** - The posts coming back from our API
 
 This component has a lot going on, so before we dive into the code, let's walk through what is happening.
 
-- We create some initial state using the useState hook. This state is created using the initialState object.
-- The onChangeText handler sets the name, description, and location fields of the post
-- The onChangeImage handler allows the user to upload an image and saves it to state. It also creates a unique image name.
-- The save function does the following:
-    1. First checks to ensure that all of the form fields are populated
-    2. Next it updates the saving state to true to show a saving indicator
-    3. We then create a unique ID for the post using the uuid library
-    4. Using the form state and the uuid, we create a post object that will be sent to the API
-    5. Next, we upload the image to S3 using uploadData(), passing in the image name and the file
-    6. Once the image upload is successful, we create the post in our GraphQL API
-    7. Finally, we update the local state, close the popup, and update the local posts array with the new post
-```html
+- We create some initial state using the **_useState_** hook. This state is created using the initialState object.
+- The **_onChangeText_** handler sets the name, description, and location fields of the post
+- The **_onChangeImage_** handler allows the user to upload an image and saves it to state. It also creates a unique image name.
+- The **_save_** function does the following:
+  1. First checks to ensure that all of the form fields are populated
+  2. Next it updates the saving state to true to show a saving indicator
+  3. We then create a unique ID for the post using the uuid library
+  4. Using the form state and the uuid, we create a post object that will be sent to the API
+  5. Next, we upload the image to S3 using **_uploadData()_**, passing in the image name and the file
+  6. Once the image upload is successful, we create the post in our GraphQL API
+  7. Finally, we update the local state, close the popup, and update the local posts array with the new post
+
+```
 import React, { useState } from "react";
 import { css } from "@emotion/css";
 import Button from "./Button";
@@ -210,7 +212,6 @@ export default function CreatePost({
     const firstHalf = e.target.files[0].name.slice(0, fileExtPosition);
     const secondHalf = e.target.files[0].name.slice(fileExtPosition);
     const fileName = firstHalf + "_" + uuid() + secondHalf;
-    console.log(fileName);
     const image = { fileInfo: e.target.files[0], name: fileName };
     updateFormState((currentState) => ({
       ...currentState,
@@ -230,10 +231,12 @@ export default function CreatePost({
     });
 
     const result = await operation.result;
+    return result;
   };
 
   /* 4. Save the post  */
   async function save() {
+    console.log("save");
     try {
       const { name, description, location, image } = formState;
       if (!name || !description || !location || !image.name) return;
@@ -251,17 +254,11 @@ export default function CreatePost({
         formState.image.name,
         formState.image.fileInfo
       );
-      // await uploadData(formState.image.name, formState.image.fileInfo);
       await client.graphql({
         query: createPost,
         variables: { input: postInfo },
-        authMode: "userPool",
       });
-      updatePosts([
-        ...posts,
-        { ...postInfo, image: formState.file, owner: user.username },
-      ]); // updated
-      // updatePosts([...posts, { ...postInfo, image: formState.file }]);
+      updatePosts([...posts, { ...postInfo, image: formState.file }]);
       updateFormState((currentState) => ({ ...currentState, saving: false }));
       updateOverlayVisibility(false);
     } catch (err) {
@@ -341,14 +338,16 @@ const savingMessageStyle = css`
 `;
 
 ```
-***
+
+---
+
 #### Post.js
 
-The next component that we'll build is the Post component.
+The next component that we'll build is the **_Post_** component.
 
 In this component, we will be reading the post id from the router parameters. We'll then use this post id to make an API call to the GraphQL API to fetch the post details.
 
-```html
+```
 // Post.js
 
 import React, { useState, useEffect } from "react";
@@ -420,5 +419,3 @@ const imageStyle = css`
 `;
 
 ```
-![API](/images/4-auth/auth-01.png)
-

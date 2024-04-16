@@ -1,7 +1,7 @@
 ---
 title: "Authentication"
 date: "`r Sys.Date()`"
-weight: 3
+weight: 4
 chapter: false
 pre: " <b> 4. </b> "
 ---

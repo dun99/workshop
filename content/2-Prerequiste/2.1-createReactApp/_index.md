@@ -8,7 +8,7 @@ pre: " <b> 2.1 </b> "
 
 To get started, we first need to create a new React project using the [Create React App CLI](https://github.com/facebook/create-react-app)
 
-```html
+```
 npx create-react-app photogram
 ```
 
@@ -16,8 +16,8 @@ npx create-react-app photogram
 
 Now change into the new app directory and install NPM packages for AWS Amplify, AWS Amplify UI React, react-router-dom, emotion, and uuid
 
-```html
-cd photogram 
+```
+cd photogram
 npm install aws-amplify @emotion/css uuid react-router-dom@5 @aws-amplify/ui-react
 ```
 

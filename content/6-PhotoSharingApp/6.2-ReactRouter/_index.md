@@ -1,23 +1,19 @@
 ---
 title: "React Router"
 date: "`r Sys.Date()`"
-weight: 1
+weight: 2
 chapter: false
-pre: " <b> 6.2. </b> "
+pre: " <b> 6.2 </b> "
 ---
 
-Next we need to create the router in App.js. Our app will have two main routes:
+Next we need to create the router in **_App.js_**. Our app will have two main routes:
 
 1. A home route - /. This route will render a list of posts from our API
 2. A post details route - /post/\:id. This route will render a single post and details about that post.
 
 Using React Router, we can read the Post ID from the route, and then fetch the post associated with it. This is a common pattern in many apps as it makes the link shareable.
 
-Another way to do this would be to have some global state management set up and then set the post ID in the global state. The main drawback of this approach is that the URL cannot be shared.
-
-Other than routing, the main functionality happening in this component is a call to fetch posts from our GraphQL API.
-
-```html
+```
 // src/App.js
 import React, { useEffect, useState } from "react";
 
@@ -154,5 +150,3 @@ export default withAuthenticator(Router);
 
 
 ```
-
-

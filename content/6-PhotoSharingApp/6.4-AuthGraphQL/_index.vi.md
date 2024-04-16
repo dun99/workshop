@@ -1,104 +1,137 @@
 ---
-title: "Xác thực trong React"
+title: "Thêm xác thực cho API"
 date: "`r Sys.Date()`"
-weight: 1
+weight: 4
 chapter: false
-pre: " <b> 4.2. </b> "
+pre: " <b> 6.4 </b> "
 ---
 
-#### withAuthenticator component
-
-Để thêm tính năng xác thực vào ứng dụng React, chúng ta sẽ vào **_src/App.js_** và import **_withAuthenticator_** HOC (Higher Order Component) từ **_@aws-amplify/ui-react_**:
-
-```html
-// src/App.js, import the withAuthenticator component and associated CSS
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
-```
-
-Tiếp theo, bọc App component với withAuthenticator
-
-```html
-function App() {
-  /* existing code here, no changes */
-}
-
-/* src/App.js, change the default export to this: */
-export default withAuthenticator(App);
-
+Ta có thể update AppSync API để enable authorization modes
+Trong ví dụ này, ta sẽ update API sử dụng Cognito và API Key để kích hoạt phân quyền truy cập
+Để enable authorization modes, ta thực hiện:
 
 ```
-
-Reload ứng dụng và xem kết quả, tính năng xác thực đã được thêm
-
-![API](/images/4-auth/auth-04.png)
-
-Chọn "Đăng ký" và làm theo hướng dẫn để tạo tài khoản. Hãy chắc chắn sử dụng một địa chỉ email thật! Sau khi gửi request đăng kí, kiểm tra email của bạn để xác nhận đăng ký.
-
-Đã tạo thành công tính năng xác thực, bạn có thể xem nó bất kỳ lúc nào trong console bằng cách chạy lệnh sau - chọn User Pool:
-
-```html
-amplify console auth
-
-Using service: Cognito, provided by: awscloudformation
-? Which console
-❯ User Pool
-Identity Pool
-Both
+amplify update api
 ```
 
-#### Thêm nút Đăng xuất
-Update file ***App.js***
+![API](/images/6-photosharingapp/app-03.png)
 
-```html
-function App({ signOut, user }) {
-  ...
-  <h1>Hello World</h1>
-  ...
-  <button onClick={signOut}>Sign out</button>
+Update **_schema_**
+
+```
+type Post
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, operations: [read] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  location: String!
+  description: String!
+  image: String
+  owner: String
 }
 ```
 
-Thêm style tại file ***src/index.css***
+Deploy lại thay đổi
 
-
-```html
-:root {
-  --amplify-primary-color: #006eff;
-  --amplify-primary-tint: #005ed9;
-  --amplify-primary-shade: #005ed9;
-}
+```
+amplify push -y
 ```
 
-Quan sát kết quả, nút Đăng xuất được thêm thành công
+Now, you will have two types of API access:
+Bây giờ ta đã có 2 loại API
 
-![API](/images/4-auth/auth-05.png)
+1. Private (Cognito): User được phép xem toàn bộ bài post. Cho phép tạo mới bài post nếu user đăng nhập thành công. Sau khi đăng nhập, user có thể sửa xoá các bài post của họ.
+2. Public (API Key): Bất kì người dùng nào dù chưa đăng nhập cũng có thể query danh sách bài post
 
-#### Kiểm tra thông tin đăng nhập
+Để gọi đến API Private, ta cần thêm **_authMode_** vào câu lệnh query hoặc mutation
 
+```
+await client.graphql({
+    query: createPost,
+    variables: { input: postInfo },
+    authMode: "userPool",
+});
+```
 
-Chúng ta có thể xem thông tin người dùng khi họ đã đăng nhập bằng cách gọi ***currentAuthenticatedUser()*** trong ***useEffect***:
+#### Thêm route mới chỉ cho phép hiển thị các bài post của bản thân
 
-```html
-import { getCurrentUser } from "aws-amplify/auth";
-...
+Tiếp theo, ta sẽ tạo thêm 1 route mới, route này có tên là My post, chỉ hiển thị các bài post của user đang đăng nhập.
 
-useEffect(() => {
-    fetchPosts();
-    currentAuthenticatedUser();
-  }, []);
+Mở file **_CreatePost.js_** và update như sau
 
-async function currentAuthenticatedUser() {
+```
+async function save() {
     try {
-      const { username, userId } = await getCurrentUser();
-      console.log(`The username: ${username}`);
-      console.log(`The userId: ${userId}`);
+      const { name, description, location, image } = formState;
+      if (!name || !description || !location || !image.name) return;
+      updateFormState((currentState) => ({ ...currentState, saving: true }));
+      const postId = uuid();
+      const postInfo = {
+        name,
+        description,
+        location,
+        image: formState.image.name,
+        id: postId,
+      };
+
+      const result = handleUpload(
+        formState.image.name,
+        formState.image.fileInfo
+      );
+      // await uploadData(formState.image.name, formState.image.fileInfo);
+      console.log("result", result);
+      await client.graphql({
+        query: createPost,
+        variables: { input: postInfo },
+        authMode: "userPool",
+      });
+      updatePosts([
+        ...posts,
+        { ...postInfo, image: formState.file, owner: user.username },
+      ]); // updated
+      updateFormState((currentState) => ({ ...currentState, saving: false }));
+      updateOverlayVisibility(false);
     } catch (err) {
-      console.log(err);
+      console.log("error: ", err);
     }
   }
 ```
 
-Kiểm tra thông tin trên Console của Browser
+Mở file **_App.js_**, tạo một state mới để lưu trữ các bài viết của user
 
-![API](/images/4-auth/auth-06.png)
+```
+const [myPosts, updateMyPosts] = useState([]);
+```
+
+Viết func **_setPostState()_** để set giá trị cho myPosts là các bài post có **_owner = user.username_**
+
+```
+async function setPostState(postsArray) {
+    const myPostData = postsArray.filter((p) => p?.owner === user?.username);
+    updateMyPosts(myPostData);
+    updatePosts(postsArray);
+  }
+```
+
+Thêm router mới
+
+```
+<Route exact path="/myposts">
+  <Posts posts={myPosts} />
+</Route>
+
+```
+
+Thêm link đến route mới tại file **_Header.js_**
+
+```
+<Link to="/myposts" className={linkStyle}>
+  My Posts
+</Link>
+```

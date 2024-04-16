@@ -20,4 +20,5 @@ An understanding of software development and prior experience with the React fra
 3.  [API](3-api/)
 4.  [Authentication](4-auth/)
 5.  [Storage](5-s3/)
-6.  [Clean up resources](6-cleanup/)
+6.  [Photo Sharing App](6-PhotoSharingApp/)
+7.  [Clean up resources](7-cleanup/)

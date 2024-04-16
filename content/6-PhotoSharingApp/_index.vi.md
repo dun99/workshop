@@ -1,14 +1,17 @@
 ---
 title: "Photo Sharing App"
 date: "`r Sys.Date()`"
-weight: 3
+weight: 6
 chapter: false
 pre: " <b> 6. </b> "
 ---
 
-Ở phần này, ta sẽ thêm Authentication cho ứng dụng, sử dụng **_AWS Cognito_** và **_@aws-amplify/ui-react_**
+Tiếp theo ta sẽ bắt đầu xây dựng giao diện ứng dụng
 
 ### Nội dung
 
-- [Authentication với AWS Cognito](4.1-AuthApi/)
-- [Authentication với React](4.2-AuthFE/)
+- [Dựng các component cần thiết](6.1-AppSetup/)
+- [Cấu hình React Router](6.2-ReactRouter/)
+- [Try it out](6.3-TryItOut/)
+- [Thêm authentication cho API](6.4-AuthGraphQL/)
+- [Hosting](6.5-Hosting/)

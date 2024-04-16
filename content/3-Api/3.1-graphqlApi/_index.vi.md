@@ -8,7 +8,7 @@ pre: " <b> 3.1. </b> "
 
 Để tạo GraphQL API bằng Amplify, ta sử dụng câu lệnh:
 
-```html
+```
 amplify add api
 ```
 
@@ -16,7 +16,7 @@ amplify add api
 
 Mở file **_amplify/backend/api/photogram/schema.graphql_** bằng IDE hoặc editor của bạn và cập nhật schema như sau:
 
-```html
+```
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 }
@@ -33,7 +33,7 @@ type Post @model {
 
 Lưu thay đổi và chạy lệnh sau:
 
-```html
+```
 amplify build
 ```
 
