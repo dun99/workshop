@@ -46,4 +46,4 @@ Cuối cùng, chọn Save and Deploy để deploy ứng dụng
 Quá trình deploy có thể mất vài phút
 ![Deploy](/images/6-photosharingapp/app-08.png)
 
-Hoàn thành quá trình deploy, ta có thể xem thành quả của mình tại domain mới được tạo ra
+Hoàn thành quá trình deploy, ta có thể xem thành quả của mình tại domain mới được tạo ra: https://main.d2svtmsd73lg46.amplifyapp.com/

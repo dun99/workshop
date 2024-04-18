@@ -46,4 +46,4 @@ Finally, we can click Save and Deploy to deploy our application!
 Now, we can push updates to Main to update our application. The deployment process may take a few minutes.
 ![Deploy](/images/6-photosharingapp/app-08.png)
 
-Deploy success!!! You can see our app in new domain
+Deploy success!!! You can see our app in new domain: https://main.d2svtmsd73lg46.amplifyapp.com/
